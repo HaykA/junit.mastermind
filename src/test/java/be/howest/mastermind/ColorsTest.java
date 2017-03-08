@@ -5,21 +5,21 @@ import static org.junit.Assert.*;
 
 public class ColorsTest {
 	
-	@Test(expected = IllegalArgumentException.class)
-	public void checking_colors_as_null_not_allowed() {
-		assertTrue(Colors.hasDifferentColors(null));
+	@Test
+	public void checking_different_colors_as_null_returns_false() {
+		assertFalse(Colors.hasDifferentColors(null, false));
 	}
 	
 	@Test
 	public void checking_different_colors_returns_true() {
 		int[] colors = {1, 2, 3, 4};
-		assertTrue(Colors.hasDifferentColors(colors));
+		assertTrue(Colors.hasDifferentColors(colors, false));
 	}
 	
 	@Test
 	public void checking_not_different_colors_returns_false() {
 		int[] colors = {1, 2, 2, 4};
-		assertFalse(Colors.hasDifferentColors(colors));
+		assertFalse(Colors.hasDifferentColors(colors, false));
 	}
 	
 	@Test
@@ -34,8 +34,8 @@ public class ColorsTest {
 		assertFalse(Colors.hasValidColors(colors));
 	}
 	
-	@Test(expected = IllegalArgumentException.class)
-	public void checking_valid_colors_as_null_not_allowed() {
-		assertTrue(Colors.hasValidColors(null));
+	@Test
+	public void checking_valid_colors_as_null_returns_false() {
+		assertFalse(Colors.hasValidColors(null));
 	}
 }

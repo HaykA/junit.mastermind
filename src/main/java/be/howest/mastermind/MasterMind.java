@@ -31,7 +31,7 @@ public final class MasterMind {
     		throw new IllegalArgumentException("Wrong Pawn Count");
     	}
 	}
-
+	
 	public int getPawnCount() {
 		return pawnCount;
 	}
@@ -82,7 +82,7 @@ public final class MasterMind {
 	}
 
 	protected boolean hasDifferentColors() {
-		return Colors.hasDifferentColors(secret);
+		return Colors.hasDifferentColors(secret, false);
 	}
 
 	public void reset() {
@@ -95,15 +95,83 @@ public final class MasterMind {
 	}
 
 	public Feedback check(int[] colors) {
-		throw new UnsupportedOperationException();
+		validateColors(colors);
+		Feedback feedback = null;
+		if (! isGameOver()) {
+			addColorsToTries(colors);
+			feedback = generateFeedback(colors);
+			checkIfWon(feedback);			
+		}
+		return feedback;
 	}
-
+	
+	private void validateColors(int[] colors) {
+		if (colors == null) {
+			throw new IllegalArgumentException("Null as Color array is not allowed!");
+		}
+		if (colors.length > colorCount) {
+			throw new IllegalArgumentException("Checking more colors than expected is not allowed!");
+		}
+		if (colors.length < colorCount) {
+			throw new IllegalArgumentException("Checking more colors than expected is not allowed!");
+		}
+		if (! Colors.hasValidColors(colors, colorCount)) {
+			throw new IllegalArgumentException("Checking with invalid colors is not allowed!");
+		}
+		if (! Colors.hasDifferentColors(colors, true)) {
+			throw new IllegalArgumentException("Checking with not different colors is not allowed!");
+		}
+	}
+	
+	protected void addColorsToTries(int[] colors) {
+		int nextTry = getNextTry();
+		for (int i = 0; i < colors.length; i++) {
+			tries[nextTry][i] = colors[i];			
+		}
+	}
+	
+	protected Feedback generateFeedback(int[] colors) {
+		Feedback feedback = new Feedback(colorCount);
+		for (int i = 0; i < colors.length; i++) {
+			for (int j = 0; j < secret.length; j++) {
+				if (colors[i] == secret[j]) {
+					boolean foundAtValidPosition = i == j;
+					feedback.addFound(foundAtValidPosition);
+				}
+			}
+		}
+		return feedback;
+	}
+	
+	protected void checkIfWon(Feedback feedback) {
+		won = feedback.getTotalFoundAtValidPosition() == colorCount;
+	}
+	
+	protected int getNextTry() {
+		int nextTry = -1;
+		boolean emptyLine;
+		for (int i = 0; i < tries.length; i++) {
+			emptyLine = true;
+			for (int _try : tries[i]) {
+				if (_try > 0) {
+					emptyLine = false;
+					break;
+				}
+			}
+			if (emptyLine) {
+				nextTry = i;
+				break;
+			}
+		}
+		return nextTry;
+	}
+	
 	public boolean hasWon() {
 		return won;
 	}
 
 	public boolean isGameOver() {
-		return resigned || won || /* TODO if no tries anymore */ false;  
+		return resigned || won || getNextTry() == -1;  
 	}
 
 	public int[] getSecret() {

@@ -18,7 +18,7 @@ public class MasterMindTest {
 
 	@Test(expected = IllegalArgumentException.class)
 	public void new_game_with_no_pawns_not_allowed() {
-		int pawnCount = -3;
+		int pawnCount = 0;
 		int colorCount = 4;
 		new MasterMind(pawnCount, colorCount);
 	}
@@ -248,7 +248,8 @@ public class MasterMindTest {
 		int pawnCount = 4;
 		int colorCount = 4;
 		MasterMind masterMind = new MasterMind(pawnCount, colorCount);
-		masterMind.check(new int[colorCount + 1]);
+		int[] colors = {1, 2, 3, 4, 5};
+		masterMind.check(colors);
 	}
 	
 	@Test
@@ -256,23 +257,16 @@ public class MasterMindTest {
 		int pawnCount = 4;
 		int colorCount = 4;
 		MasterMind masterMind = new MasterMind(pawnCount, colorCount);
-		masterMind.check(new int[colorCount]);
-	}
-	
-	@Test
-	public void checking_with_array_containing_less_than_expected_count_of_colors_is_allowed() {
-		int pawnCount = 4;
-		int colorCount = 4;
-		MasterMind masterMind = new MasterMind(pawnCount, colorCount);
-		masterMind.check(new int[colorCount - 1]);
+		int[] colors = {1, 2, 3, 4};
+		masterMind.check(colors);
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
-	public void checking_with_array_containing_zero_values_not_allowed() {
+	public void checking_with_array_containing_less_than_expected_count_of_colors_not_allowed() {
 		int pawnCount = 4;
 		int colorCount = 4;
 		MasterMind masterMind = new MasterMind(pawnCount, colorCount);
-		int[] colors = {1, 0, 3, 2};
+		int[] colors = {1, 0, 3};
 		masterMind.check(colors);
 	}
 	
@@ -295,12 +289,33 @@ public class MasterMindTest {
 	}
 	
 	@Test
+	public void next_try_index_of_new_game_equals_to_zero() {
+		MasterMind masterMind = new MasterMind(4, 4);
+		assertEquals(0, masterMind.getNextTry());
+	}
+	
+	@Test
 	public void checking_with_array_containing_expected_count_of_different_correct_color_values_is_allowed_and_decrements_total_tries() {
 		int pawnCount = 4;
 		int colorCount = 4;
 		MasterMind masterMind = new MasterMind(pawnCount, colorCount);
-		int[] colors = {1, 4, 3, 2};
+		int[] colors = {1, 4, 3, 0};
 		masterMind.check(colors);
+		int nextTry = masterMind.getNextTry();
+		assertEquals(1, nextTry);
+	}
+	
+	@Test
+	public void after_reaching_maximum_tries_game_is_over() {
+		int pawnCount = 4;
+		int colorCount = 4;
+		MasterMind masterMind = new MasterMind(pawnCount, colorCount);
+		int[] colors = {1, 0, 3, 2};
+		masterMind.check(colors);
+		masterMind.check(colors);
+		masterMind.check(colors);
+		masterMind.check(colors);
+		assertTrue(masterMind.isGameOver());
 	}
 	
 }

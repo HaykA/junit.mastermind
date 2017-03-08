@@ -20,14 +20,19 @@ public final class Colors {
 
 	private Colors() {}
 	
-	public static boolean hasDifferentColors(int[] colors) {
+	public static boolean hasDifferentColors(int[] colors, boolean ignoreZeroes) {
 		if (colors == null) {
-			throw new IllegalArgumentException("Colors array may not be null!");
+			return false;
 		}
 		for (int i = 0; i < colors.length - 1; i++) {
 			for (int j = i + 1; j < colors.length; j++) {
 				if (colors[i] == colors[j]) {
-					return false;
+					if (! ignoreZeroes) {
+						return false;						
+					}
+					if (colors[i] != 0) {
+						return false;
+					}
 				}
 			}
 		}
@@ -35,13 +40,25 @@ public final class Colors {
 	}
 	
 	public static boolean hasValidColors(int[] colors) {
+		return hasValidColors(colors, MAX);
+	}
+	
+	public static boolean hasValidColors(int[] colors, int max) {
 		if (colors == null) {
-			throw new IllegalArgumentException("Colors array may not be null!");
+			return false;
 		}
+		boolean emptyArray = true;
+		
 		for(int color : colors) {
-			if (color < MIN || color > MAX) {
+			if (color < 0 || color > max) {
 				return false;
 			}
+			if (color >= MIN && color <= max) {
+				emptyArray = false;
+			}
+		}
+		if (emptyArray) {
+			return false;
 		}
 		return true;
 	}
