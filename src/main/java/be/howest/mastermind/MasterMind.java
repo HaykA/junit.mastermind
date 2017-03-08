@@ -1,14 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package be.howest.mastermind;
 
-/**
- *
- * @author hayk
- */
 public final class MasterMind {
 
 	private final int pawnCount;
@@ -16,7 +7,7 @@ public final class MasterMind {
 	private boolean resined = false;
 	private int[] secret;
 	private int[][] tries;
-	
+
 	public MasterMind(int pawnCount, int colorCount) {
 		this.pawnCount = pawnCount;
 		this.colorCount = colorCount;
@@ -55,11 +46,11 @@ public final class MasterMind {
 	public void reset() {
 		throw new UnsupportedOperationException(); // TODO
 	}
-	
+
 	public void resign() {
 		throw new UnsupportedOperationException(); // TODO
 	}
-	
+
 	public Feedback check(int[] colors) {
 		throw new UnsupportedOperationException();
 	}
@@ -67,11 +58,11 @@ public final class MasterMind {
 	public boolean hasWon() {
 		throw new UnsupportedOperationException();
 	}
-	
+
 	public boolean isGameOver() {
 		throw new UnsupportedOperationException();
 	}
-	
+
 	public int[] getSecret() {
 		throw new UnsupportedOperationException();
 	}
