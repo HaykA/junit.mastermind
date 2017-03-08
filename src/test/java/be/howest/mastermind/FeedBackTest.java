@@ -38,7 +38,7 @@ public class FeedBackTest {
 	
 	@Test
 	public void total_found_at_invalid_position_becomes_one_after_accepting_first_found_color_at_invalid_position() {
-		feedback.addFound(true);
+		feedback.addFound(false);
 		assertEquals(1, feedback.getTotalFoundAtInvalidPosition());
 	}
 	

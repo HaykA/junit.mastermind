@@ -10,6 +10,9 @@ public class Feedback {
     private final int colorCount;
     
     public Feedback(int colorCount) {
+    	if (colorCount <= 0) {
+    		throw new IllegalArgumentException("@Feedback: Color count may not be negative or zero!");
+    	}
     	this.colorCount = colorCount;
     }
 
@@ -22,10 +25,16 @@ public class Feedback {
 	}
     
 	public int getTotalFoundAtInvalidPosition() {
-		throw new UnsupportedOperationException();
+		if (totalFound == 0) {
+			return -1;
+		}
+		return totalFound - totalFoundAtValidPosition;
 	}
 
 	public void addFound(boolean atValidPosition) {
-    	throw new UnsupportedOperationException();
+    	if (atValidPosition) {
+    		totalFoundAtValidPosition++;
+    	}
+    	totalFound++;
     }
 }
