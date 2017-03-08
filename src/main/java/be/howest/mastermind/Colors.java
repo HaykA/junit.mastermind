@@ -21,11 +21,29 @@ public final class Colors {
 	private Colors() {}
 	
 	public static boolean hasDifferentColors(int[] colors) {
-		throw new UnsupportedOperationException();
+		if (colors == null) {
+			throw new IllegalArgumentException("Colors array may not be null!");
+		}
+		for (int i = 0; i < colors.length - 1; i++) {
+			for (int j = i + 1; j < colors.length; j++) {
+				if (colors[i] == colors[j]) {
+					return false;
+				}
+			}
+		}
+		return true;
 	}
 	
 	public static boolean hasValidColors(int[] colors) {
-		throw new UnsupportedOperationException();
+		if (colors == null) {
+			throw new IllegalArgumentException("Colors array may not be null!");
+		}
+		for(int color : colors) {
+			if (color < MIN || color > MAX) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 	public static String getColorName(int colorId) {

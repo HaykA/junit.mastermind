@@ -30,7 +30,7 @@ public class ColorsTest {
 	
 	@Test
 	public void checking_invalid_colors_returns_false() {
-		int[] colors = {1, 2, 3, 4};
+		int[] colors = {1, 2, 3, 12};
 		assertFalse(Colors.hasValidColors(colors));
 	}
 	

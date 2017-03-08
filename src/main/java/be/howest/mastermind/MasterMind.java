@@ -82,14 +82,7 @@ public final class MasterMind {
 	}
 
 	protected boolean hasDifferentColors() {
-		for (int i = 0; i < secret.length - 1; i++) {
-			for (int j = i + 1; j < secret.length; j++) {
-				if (secret[i] == secret[j]) {
-					return false;
-				}
-			}
-		}
-		return true;
+		return Colors.hasDifferentColors(secret);
 	}
 
 	public void reset() {
