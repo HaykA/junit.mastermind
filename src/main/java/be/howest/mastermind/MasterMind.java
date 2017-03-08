@@ -53,16 +53,13 @@ public final class MasterMind {
 
 	private void initSecret() {
 		secret = new int[colorCount];
-		for (int i = 0; i < colorCount; i++) {
-			secret[i] = -1;
-		}
 		generateSecret();
 	}
 	
 	private void generateSecret() {
 		Random random = new Random(/* TODO remove seed */50L);
 		for (int i = 0; i < colorCount; i++) {
-			int color = random.nextInt(colorCount);
+			int color = random.nextInt(colorCount) + 1;
 			if (secretContains(color)) {
 				i--;
 			} else {
@@ -119,9 +116,6 @@ public final class MasterMind {
 	public int[] getSecret() {
 		if (! isGameOver()) {
 			int[] mask = new int[colorCount];
-			for (int i = 0; i < mask.length; i++) {
-				mask[i] = -1;
-			}
 			return mask;
 		}
 		return secret;

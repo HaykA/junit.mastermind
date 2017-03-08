@@ -71,6 +71,13 @@ public class MasterMindTest {
 		int colorCount = 4;
 		new MasterMind(pawnCount, colorCount);
 	}
+	
+	@Test
+	public void new_game_with_eight_pawns_and_ten_colors_does_not_throw_any_exception() {
+		int pawnCount = 8;
+		int colorCount = 10;
+		new MasterMind(pawnCount, colorCount);
+	}
 
 	@Test
 	public void fifty_new_games_generate_correct_number_of_colors() {
@@ -175,22 +182,22 @@ public class MasterMindTest {
 	}
 	
 	@Test
-	public void getSecret_method_returns_an_array_of_negative_one_numbers_if_game_is_not_over() {
+	public void getSecret_method_returns_an_array_containing_zeroes_if_game_is_not_over() {
 		int pawnCount = 4;
 		int colorCount = 10;
 		MasterMind masterMind = new MasterMind(pawnCount, colorCount);
-		int[] negativeOneNumbers = {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1};
+		int[] negativeOneNumbers = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 		assertArrayEquals(negativeOneNumbers, masterMind.getSecret());
 	}
 	
 	@Test
-	public void getSecret_method_returns_an_array_containing_no_negative_one_number_if_game_is_over() {
+	public void getSecret_method_returns_an_array_containing_no_zeroes_if_game_is_over() {
 		int pawnCount = 4;
 		int colorCount = 10;
 		MasterMind masterMind = new MasterMind(pawnCount, colorCount);
 		masterMind.resign();
 		for(int color: masterMind.getSecret()) {
-			assertNotEquals(-1, color);
+			assertNotEquals(0, color);
 		}
 	}
 	
@@ -201,7 +208,7 @@ public class MasterMindTest {
 		MasterMind masterMind = new MasterMind(pawnCount, colorCount);
 		masterMind.resign();
 		for(int color: masterMind.getSecret()) {
-			assertNotEquals(-1, color);
+			assertNotEquals(0, color);
 		}
 	}
 	
@@ -211,7 +218,7 @@ public class MasterMindTest {
 		int colorCount = 10;
 		MasterMind masterMind = new MasterMind(pawnCount, colorCount);
 		masterMind.resign();
-		boolean[] found = {false, false, false, false, false, false, false, false, false, false};
+		boolean[] found = {true, false, false, false, false, false, false, false, false, false, false};
 		for(int color: masterMind.getSecret()) {
 			found[color] = true;
 		}
@@ -219,4 +226,81 @@ public class MasterMindTest {
 			assertTrue(isDifferentColor);
 		}
 	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void checking_with_null_not_allowed() {
+		int pawnCount = 4;
+		int colorCount = 4;
+		MasterMind masterMind = new MasterMind(pawnCount, colorCount);
+		masterMind.check(null);
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void checking_with_empty_array_not_allowed() {
+		int pawnCount = 4;
+		int colorCount = 4;
+		MasterMind masterMind = new MasterMind(pawnCount, colorCount);
+		masterMind.check(new int[colorCount]);
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void checking_with_array_containing_more_colors_than_expected_not_allowed() {
+		int pawnCount = 4;
+		int colorCount = 4;
+		MasterMind masterMind = new MasterMind(pawnCount, colorCount);
+		masterMind.check(new int[colorCount + 1]);
+	}
+	
+	@Test
+	public void checking_with_array_containing_expected_count_of_colors_is_allowed() {
+		int pawnCount = 4;
+		int colorCount = 4;
+		MasterMind masterMind = new MasterMind(pawnCount, colorCount);
+		masterMind.check(new int[colorCount]);
+	}
+	
+	@Test
+	public void checking_with_array_containing_less_than_expected_count_of_colors_is_allowed() {
+		int pawnCount = 4;
+		int colorCount = 4;
+		MasterMind masterMind = new MasterMind(pawnCount, colorCount);
+		masterMind.check(new int[colorCount - 1]);
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void checking_with_array_containing_zero_values_not_allowed() {
+		int pawnCount = 4;
+		int colorCount = 4;
+		MasterMind masterMind = new MasterMind(pawnCount, colorCount);
+		int[] colors = {1, 0, 3, 2};
+		masterMind.check(colors);
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void checking_with_array_containing_incorrect_color_values_not_allowed() {
+		int pawnCount = 4;
+		int colorCount = 4;
+		MasterMind masterMind = new MasterMind(pawnCount, colorCount);
+		int[] colors = {1, 5, 3, 2};
+		masterMind.check(colors);
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void checking_with_array_containing_not_different_color_values_not_allowed() {
+		int pawnCount = 4;
+		int colorCount = 4;
+		MasterMind masterMind = new MasterMind(pawnCount, colorCount);
+		int[] colors = {1, 3, 3, 2};
+		masterMind.check(colors);
+	}
+	
+	@Test
+	public void checking_with_array_containing_expected_count_of_different_correct_color_values_is_allowed_and_decrements_total_tries() {
+		int pawnCount = 4;
+		int colorCount = 4;
+		MasterMind masterMind = new MasterMind(pawnCount, colorCount);
+		int[] colors = {1, 4, 3, 2};
+		masterMind.check(colors);
+	}
+	
 }

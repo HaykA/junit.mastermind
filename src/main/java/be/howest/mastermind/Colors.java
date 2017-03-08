@@ -5,20 +5,28 @@ package be.howest.mastermind;
  * @author hayk
  */
 public final class Colors {
-	public final static int MIN = 0;
+	public final static int MIN = 1;
 	public final static int RED = MIN;
-	public final static int ORANGE = 1;
-	public final static int YELLOW = 2;
-	public final static int GREEN = 3;
-	public final static int BLUE = 4;
-	public final static int PURPLE = 5;
-	public final static int PINK = 6;
-	public final static int WHITE = 7;
-	public final static int GREY = 8;
-	public final static int MAX = 9;
+	public final static int ORANGE = 2;
+	public final static int YELLOW = 3;
+	public final static int GREEN = 4;
+	public final static int BLUE = 5;
+	public final static int PURPLE = 6;
+	public final static int PINK = 7;
+	public final static int WHITE = 8;
+	public final static int GREY = 9;
+	public final static int MAX = 10;
 	public final static int BLACK = MAX;
 
 	private Colors() {}
+	
+	public static boolean hasDifferentColors(int[] colors) {
+		throw new UnsupportedOperationException();
+	}
+	
+	public static boolean hasValidColors(int[] colors) {
+		throw new UnsupportedOperationException();
+	}
 
 	public static String getColorName(int colorId) {
 		switch (colorId) {
@@ -29,7 +37,7 @@ public final class Colors {
 		case YELLOW:
 			return "Yellow";
 		case GREEN:
-			return "Green:";
+			return "Green";
 		case BLUE:
 			return "Blue";
 		case PURPLE:
