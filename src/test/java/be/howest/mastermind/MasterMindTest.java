@@ -79,7 +79,7 @@ public class MasterMindTest {
 		MasterMind masterMind;
 		for (int i = 0; i < 50; i++) {
 			masterMind = new MasterMind(pawnCount, colorCount);
-			assertEquals(colorCount, masterMind.getColorCount());
+			assertEquals(colorCount, masterMind.getSecret().length);
 		}
 	}
 
@@ -179,7 +179,7 @@ public class MasterMindTest {
 		int pawnCount = 4;
 		int colorCount = 10;
 		MasterMind masterMind = new MasterMind(pawnCount, colorCount);
-		int[] negativeOneNumbers = {-1, -1, -1, -1, -1, -1, -1, -1, -1};
+		int[] negativeOneNumbers = {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1};
 		assertArrayEquals(negativeOneNumbers, masterMind.getSecret());
 	}
 	
