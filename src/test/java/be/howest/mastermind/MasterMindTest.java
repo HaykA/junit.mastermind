@@ -64,9 +64,9 @@ public class MasterMindTest {
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void new_game_with_more_than_eight_colors_not_allowed() {
+	public void new_game_with_more_than_ten_colors_not_allowed() {
 		int pawnCount = 4;
-		int colorCount = 8;
+		int colorCount = 11;
 		new MasterMind(pawnCount, colorCount);
 	}
 
@@ -80,7 +80,7 @@ public class MasterMindTest {
 	@Test
 	public void fifty_new_games_generate_correct_number_of_colors() {
 		int pawnCount = 8;
-		int colorCount = 8;
+		int colorCount = 10;
 		MasterMind masterMind;
 		for (int i = 0; i < 50; i++) {
 			masterMind = new MasterMind(pawnCount, colorCount);
@@ -91,7 +91,7 @@ public class MasterMindTest {
 	@Test
 	public void fifty_new_games_generate_different_colors() {
 		int pawnCount = 8;
-		int colorCount = 8;
+		int colorCount = 10;
 		MasterMind masterMind;
 		for (int i = 0; i < 50; i++) {
 			masterMind = new MasterMind(pawnCount, colorCount);
@@ -102,7 +102,7 @@ public class MasterMindTest {
 	@Test
 	public void fifty_times_resetting_an_existing_game_regenerates_correct_number_of_colors() {
 		int pawnCount = 8;
-		int colorCount = 8;
+		int colorCount = 10;
 		MasterMind masterMind = new MasterMind(pawnCount, colorCount);
 		masterMind.reset();
 		assertEquals(colorCount, masterMind.getColorCount());
@@ -111,7 +111,7 @@ public class MasterMindTest {
 	@Test
 	public void fifty_times_resetting_an_existing_game_regenerates_different_colors() {
 		int pawnCount = 8;
-		int colorCount = 8;
+		int colorCount = 10;
 		MasterMind masterMind;
 		for (int i = 0; i < 50; i++) {
 			masterMind = new MasterMind(pawnCount, colorCount);
@@ -151,5 +151,77 @@ public class MasterMindTest {
 		int colorCount = 4;
 		MasterMind masterMind = new MasterMind(pawnCount, colorCount);
 		assertEquals(colorCount, masterMind.getTries()[0].length);
+	}
+	
+	@Test
+	public void new_game_is_not_over_if_not_resigned() {
+		int pawnCount = 4;
+		int colorCount = 8;
+		MasterMind masterMind = new MasterMind(pawnCount, colorCount);
+		assertFalse(masterMind.isGameOver());
+	}
+	
+	@Test
+	public void game_is_over_when_resigned() {
+		int pawnCount = 4;
+		int colorCount = 8;
+		MasterMind masterMind = new MasterMind(pawnCount, colorCount);
+		masterMind.resign();
+		assertTrue(masterMind.isGameOver());
+	}
+	
+	@Test
+	public void player_has_lost_if_resigned() {
+		int pawnCount = 4;
+		int colorCount = 8;
+		MasterMind masterMind = new MasterMind(pawnCount, colorCount);
+		masterMind.resign();
+		assertFalse(masterMind.hasWon());
+	}
+	
+	@Test
+	public void getSecret_method_returns_an_array_of_negative_one_numbers_if_game_is_not_over() {
+		int pawnCount = 4;
+		int colorCount = 10;
+		MasterMind masterMind = new MasterMind(pawnCount, colorCount);
+		int[] negativeOneNumbers = {-1, -1, -1, -1, -1, -1, -1, -1, -1};
+		assertArrayEquals(negativeOneNumbers, masterMind.getSecret());
+	}
+	
+	@Test
+	public void getSecret_method_returns_an_array_containing_no_negative_one_number_if_game_is_over() {
+		int pawnCount = 4;
+		int colorCount = 10;
+		MasterMind masterMind = new MasterMind(pawnCount, colorCount);
+		masterMind.resign();
+		for(int color: masterMind.getSecret()) {
+			assertNotEquals(-1, color);
+		}
+	}
+	
+	@Test
+	public void getSecret_method_returns_an_array_containing_valid_colors_if_game_is_over() {
+		int pawnCount = 4;
+		int colorCount = 10;
+		MasterMind masterMind = new MasterMind(pawnCount, colorCount);
+		masterMind.resign();
+		for(int color: masterMind.getSecret()) {
+			assertNotEquals(-1, color);
+		}
+	}
+	
+	@Test
+	public void getSecret_method_returns_an_array_containing_different_colors_if_game_is_over() {
+		int pawnCount = 4;
+		int colorCount = 10;
+		MasterMind masterMind = new MasterMind(pawnCount, colorCount);
+		masterMind.resign();
+		boolean[] found = {false, false, false, false, false, false, false, false, false, false};
+		for(int color: masterMind.getSecret()) {
+			found[color] = true;
+		}
+		for(boolean isDifferentColor : found) {
+			assertTrue(isDifferentColor);
+		}
 	}
 }
