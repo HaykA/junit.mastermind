@@ -81,7 +81,7 @@ public class FeedBackTest {
 		int colorCount = 3;
 		Feedback feedbackForThreeColors = new Feedback(colorCount);
 		for (int i = 0; i < 10; i++) {
-			feedback.addFound(true);
+			feedbackForThreeColors.addFound(true);
 			assertTrue(feedbackForThreeColors.getTotalFoundAtValidPosition() <= colorCount);
 		}
 	}
@@ -91,7 +91,7 @@ public class FeedBackTest {
 		int colorCount = 3;
 		Feedback feedbackForThreeColors = new Feedback(colorCount);
 		for (int i = 0; i < 10; i++) {
-			feedback.addFound(false);
+			feedbackForThreeColors.addFound(false);
 			assertTrue(feedbackForThreeColors.getTotalFoundAtInvalidPosition() <= colorCount);
 		}
 	}
@@ -101,7 +101,7 @@ public class FeedBackTest {
 		int colorCount = 8;
 		Feedback feedbackForEightColors = new Feedback(colorCount);
 		for (int i = 0; i < 30; i++) {
-			feedback.addFound(i % 2 == 0);
+			feedbackForEightColors.addFound(i % 2 == 0);
 			assertTrue(feedbackForEightColors.getTotalFoundAtValidPosition()
 					+ feedbackForEightColors.getTotalFoundAtInvalidPosition() <= colorCount);
 		}
