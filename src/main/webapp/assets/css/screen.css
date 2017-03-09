@@ -1,0 +1,154 @@
+@CHARSET "UTF-8";
+/* 480, 481 */
+/* 767, 768 */
+/* 991, 992 */
+/* 1200 */
+
+body {
+
+}
+
+.container {
+	background-image: url("../media/mmbg.jpg");
+	background-repeat: no-repeat;
+	background-size:  cover;
+	background-attachment: fixed;
+	background-position: center center;
+}
+
+#mastermind {
+	display: inline-block;
+	background-color: rgba(255,255,255,0.2);
+	box-shadow: 0 0 15px #000;
+	border-radius: 5px;
+	padding: 10px;
+}
+
+.centered {
+	text-align: center;
+}
+
+.pawn > * {
+	background-color: transparent;
+	background-size: cover;
+	float: left;
+	border: 0;
+	margin: 1px;
+}
+
+.pawn button {
+	display: block;
+}
+
+.pawn > .cell {
+	background-image: url("../media/cell_bg.png");
+}
+
+.pawn .color,
+.pawn > [data-color] > span {
+	display: block;
+	box-sizing: content-box;
+	height: 72px;
+	width: 72px;
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: 100% auto;
+	
+}
+
+.pawn-active > button[data-color='0'] > span {
+	background-image: url("../media/colors/0_a.png");
+}
+
+.pawn-active > button[data-color='0']:hover > span {
+	background-image: url("../media/colors/0_a_hover.png");
+}
+
+.pawn-history > div[data-color='0'] > span {
+	background-image: url("../media/colors/0_h.png");
+}
+
+.pawn > [data-color='0'] > span {
+	background-image: url("../media/colors/0.png");
+}
+
+.pawn > [data-color='1'] > span {
+	background-image: url("../media/colors/1.png");
+}
+
+.pawn > [data-color='2'] > span {
+	background-image: url("../media/colors/2.png");
+}
+
+.pawn > [data-color='3'] > span {
+	background-image: url("../media/colors/3.png");
+}
+
+.pawn > [data-color='4'] > span {
+	background-image: url("../media/colors/4.png");
+}
+
+.pawn > [data-color='5'] > span {
+	background-image: url("../media/colors/5.png");
+}
+
+.pawn > [data-color='6'] > span {
+	background-image: url("../media/colors/6.png");
+}
+
+.pawn > [data-color='7'] > span {
+	background-image: url("../media/colors/7.png");
+}
+
+.pawn > [data-color='8'] > span {
+	background-image: url("../media/colors/8.png");
+}
+
+.pawn > [data-color='9'] > span {
+	background-image: url("../media/colors/9.png");
+}
+
+.pawn > [data-color='10'] > span {
+	background-image: url("../media/colors/10.png");
+}
+
+.cf:after, .cf:before,
+.pawn:after, .pawn:before {
+    content: '';
+    display: table;
+}
+
+.cf:after,
+.pawn:after {
+    clear: both;
+}
+
+.pawn > * {
+	box-sizing: content-box;
+	width: 72px;
+	height: 72px;
+	padding: 9px;
+}
+
+.pawn-active > button[data-color] {
+	background-image: url("../media/cell_bg_a.png");
+	background-size: cover;
+}
+
+.pawn-active > button[data-color]:hover {
+	background-image: url("../media/cell_bg_a_hover.png");
+	background-size: cover;
+	cursor: pointer;
+	cursor: hand;
+}
+
+.pawn-history > div[data-color] {
+	background-image: url("../media/cell_bg_h.png");
+	background-size: cover;
+}
+
+@media screen and (min-width: 1200px) {
+	.container {
+		padding: 15px;
+	}
+}

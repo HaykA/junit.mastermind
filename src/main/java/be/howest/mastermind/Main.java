@@ -1,39 +1,52 @@
 package be.howest.mastermind;
 
+import be.howest.entities.Color;
+import be.howest.mastermind.exceptions.MasterMindCheckException;
+import be.howest.services.ColorService;
+import be.howest.services.SchemeService;
+
 /**
  *
  * @author hayk
  */
 public class Main {
     public static void main(String args[]) {
-
-    	Feedback feedback;
-    	int[] colors =  {4, 9, 3, 2, 1, 0, 6, 0, 10, 0}; // 8 9 4 3 2 7 1 6 5 10
+    	int totalTries = (7 * 3 + 10) / 2;
+		totalTries += totalTries % 2;
+		System.out.println(totalTries);
+//    	Feedback feedback;
+//    	int[] colors =  {1, 4, 6, 2}; // 8 9 4 3 2 7 1 6 5 10
+//    	MasterMindFactory factory = new MasterMindFactory();
+//    	MasterMind masterMind = factory.createMasterMind(SchemeService.readDefault());
+//    	try {
+//			feedback = masterMind.check(colors);
+//			printFeedbackRow(colors, feedback);
+//	    	colors = new int[] {4, 5, 3, 2}; // 8 9 4 3 2 7 1 6 5 10
+//	    	feedback = masterMind.check(colors);
+//	    	printFeedbackRow(colors, feedback);
+//	    	colors = new int[] {4, 1, 3, 2}; // 8 9 4 3 2 7 1 6 5 10
+//	    	feedback = masterMind.check(colors);
+//	    	printFeedbackRow(colors, feedback);
+//	    	colors = new int[] {4, 0, 3, 2}; // 8 9 4 3 2 7 1 6 5 10
+//	    	feedback = masterMind.check(colors);
+//	    	printFeedbackRow(colors, feedback);
+//	    	colors = new int[] {1, 5, 4, 3}; // 8 9 4 3 2 7 1 6 5 10
+//	    	//colors = new int[] {8, 9, 4, 3, 2, 7, 1, 0, 5, 10}; // 8 9 4 3 2 7 1 6 5 10
+//	    	feedback = masterMind.check(colors);
+//	    	printFeedbackRow(colors, feedback);
+//	    	if (masterMind.isGameOver()) {
+//	    		System.out.println("GAME OVER");
+//	    	}
+//	    	if (masterMind.hasWon()) {
+//	    		System.out.println("YOU WON");
+//	    	} else {
+//	    		System.out.println("YOU LOST");
+//	    	}
+//		} catch (MasterMindCheckException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
     	
-    	MasterMind masterMind = new MasterMind(5, 10);
-    	feedback = masterMind.check(colors);
-    	printFeedbackRow(colors, feedback);
-    	colors = new int[] {4, 9, 3, 2, 1, 0, 6, 0, 5, 10}; // 8 9 4 3 2 7 1 6 5 10
-    	feedback = masterMind.check(colors);
-    	printFeedbackRow(colors, feedback);
-    	colors = new int[] {4, 9, 3, 2, 1, 7, 6, 0, 5, 10}; // 8 9 4 3 2 7 1 6 5 10
-    	feedback = masterMind.check(colors);
-    	printFeedbackRow(colors, feedback);
-    	colors = new int[] {4, 9, 3, 2, 8, 7, 1, 0, 5, 10}; // 8 9 4 3 2 7 1 6 5 10
-    	feedback = masterMind.check(colors);
-    	printFeedbackRow(colors, feedback);
-    	colors = new int[] {8, 9, 4, 3, 2, 7, 1, 6, 5, 10}; // 8 9 4 3 2 7 1 6 5 10
-    	//colors = new int[] {8, 9, 4, 3, 2, 7, 1, 0, 5, 10}; // 8 9 4 3 2 7 1 6 5 10
-    	feedback = masterMind.check(colors);
-    	printFeedbackRow(colors, feedback);
-    	if (masterMind.isGameOver()) {
-    		System.out.println("GAME OVER");
-    	}
-    	if (masterMind.hasWon()) {
-    		System.out.println("YOU WON");
-    	} else {
-    		System.out.println("YOU LOST");
-    	}
     	//printIntArr(masterMind.getSecret());
         //System.out.println("вЂў~~~~Г—");
     }
@@ -48,8 +61,17 @@ public class Main {
     }
     
     private static void printIntArr(int[] arr) {
-    	for (int i : arr) {
-    		System.out.printf("%-10s", Colors.getColorName(i), i);
+    	ColorService service = new ColorService();
+    	for (long i : arr) {
+    		Color color = service.read(i);
+    		String name;
+    		if (color == null) {
+    			name = "Unknown";
+    		} else {
+    			name = color.getName();
+    		}
+    		
+    		System.out.printf("%-10s", name, i);
     	}
     }
     

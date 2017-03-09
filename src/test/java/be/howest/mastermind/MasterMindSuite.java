@@ -13,4 +13,4 @@ import org.junit.runners.Suite;
 	be.howest.mastermind.FeedBackTest.class,
 	be.howest.mastermind.ColorsTest.class
 	})
-public class MastermindSuite {}
+public class MasterMindSuite {}

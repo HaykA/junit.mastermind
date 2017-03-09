@@ -4,7 +4,6 @@
   <groupId>be.howest.mastermindapp</groupId>
   <artifactId>mastermindapp</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <packaging>war</packaging>
   <build>
     <plugins>
       <plugin>
@@ -44,7 +43,7 @@
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <groupId>javax.servlet</groupId>
+      <groupId>jstl</groupId>
       <artifactId>jstl</artifactId>
       <version>1.2</version>
     </dependency>
