@@ -6,17 +6,9 @@
    http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd'>
    <tlib-version>1.0</tlib-version>
    <short-name>core</short-name>
-   <uri>http://howest.be/bugs/core</uri>
+   <uri>http://howest.be/bugs/mastermind</uri>
    <tag-file>
-      <name>head</name>
-      <path>/WEB-INF/tags/core/head.tag</path>
-   </tag-file>
-   <tag-file>
-      <name>tail</name>
-      <path>/WEB-INF/tags/core/tail.tag</path>
-   </tag-file>
-   <tag-file>
-      <name>header</name>
-      <path>/WEB-INF/tags/core/header.tag</path>
+      <name>scheme</name>
+      <path>/WEB-INF/tags/mastermind/scheme.tag</path>
    </tag-file>
 </taglib>

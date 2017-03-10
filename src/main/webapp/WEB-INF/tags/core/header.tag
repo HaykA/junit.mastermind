@@ -6,6 +6,11 @@
 <header class="navheader navheader-fixed">
   <nav class="navmain navmain-default">
     <ul>
+      <%-- Brand --%>
+      <li class="brand">
+        <a href="<c:url value='/'/>"><i class="fa fa-bug"></i></a>
+      </li>
+          
       <%-- Home --%>
       <c:set var="menuItemHome" value='<i class="fa fa-fw fa-home"></i> Home'/>
       <c:choose>
@@ -29,20 +34,31 @@
       </c:otherwise>
       </c:choose>
       <%-- End Home --%>
+
+      <%-- LCD --%>
+      <li>
+        <ul class="navmain-lcd">
+            <li class="lcd-bigbugs"><i class="fa fa-fw fa-bug"></i> 1</li>
+            <li class="lcd-bugs"><i class="fa fa-fw fa-bug"></i> 273</li>
+            <li class="lcd-gift"><i class="fa fa-fw fa-gift"></i> 3</li>
+            <li class="lcd-eco"><i class="fa fa-fw fa-leaf"></i> 34</li>
+            <li class="lcd-heart"><i class="fa fa-fw fa-heart"></i> 2</li>
+        </ul>
+      </li>
+      <%-- End LCD --%>
       
       <%-- Signing --%>
-      
       <c:choose>
       <c:when test="${not empty user}">
-      <li>${user.name}</li>
-      <li>  
+      <li class="pull-right">${user.name}</li>
+      <li class="pull-right">
         <form action="<c:url value='/auth'><c:param name='signout'/></c:url>" method="post">
           <button class="button button-success" type="submit"><i class="fa fa-fw fa-sign-out"></i> Sign Out</button>
         </form>
       </li>
       </c:when>
       <c:otherwise>
-      <li><a href="<c:url value='/auth'/>"><i class="fa fa-fw fa-sign-in"></i> Sign In</a></li>
+      <li class="pull-right"><a href="<c:url value='/auth'/>"><i class="fa fa-fw fa-sign-in"></i> Sign In</a></li>
       </c:otherwise>
       </c:choose>
       

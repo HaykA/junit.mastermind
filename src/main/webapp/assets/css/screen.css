@@ -10,9 +10,18 @@ body {
 	font-family: "Titillium Web", sans-serif;
 }
 
-.navheader,
+.pull-right {
+	float: right;
+}
+
+.navheader {
+	width: 100%;
+}
+
 .navmain {
 	width: 100%;
+	box-shadow: 0 0 10px #000;
+	max-height: 64px;
 }
 
 .navheader-fixed {
@@ -22,7 +31,95 @@ body {
 
 .navmain-default {
 	width: 100%;
-	background-color: #e6e6e6;
+	background-image: url("../media/navmain_dark_bg.png");
+}
+
+.navmain li {
+	display: inline-block;
+	line-height: 4rem;
+	color: rgba(255,255,255,0.8);
+	cursor: default;
+	font-weight: 600;
+}
+
+.navmain li a {
+	display: inline-block;
+	color: rgba(255,255,255,0.8);
+	line-height: auto;
+	padding-right: 10px;
+	padding-left: 10px;
+	text-decoration: none; 
+}
+
+.navmain li a:hover {
+	background-color: rgba(255,255,255,0.2);
+}
+
+.navmain .brand {
+	width: 64px;
+	text-align: center;
+	font-size: 2rem;
+	vertical-align: middle;
+	padding: 0;
+}
+
+.navmain .brand a {
+	line-height: auto;
+	padding: 0;
+	display: block;
+	background-color: rgba(0,0,0,0.8);
+	
+}
+
+.navmain .brand a:hover {
+	background-color: rgba(0,0,0,0.5);
+	color: gold;
+}
+
+.navmain-lcd {
+	width: 350px;
+	min-height: 64px;
+	background-image: url("../media/lcd_bg.png");
+	background-repeat: no-repeat;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+.navmain-lcd li {
+	font-size: 1.2rem;
+	line-height: 100%;
+	margin-left: 6px;
+	margin-right: 6px;
+}
+
+.navmain-lcd .lcd-bigbugs i {
+	color: deeppink;
+}
+
+.navmain-lcd .lcd-bugs i {
+	color: gold;
+}
+
+.navmain-lcd .lcd-gift i {
+	color: cornflowerblue;
+}
+
+.navmain-lcd .lcd-eco i {
+	color: lawngreen;
+}
+
+.navmain-lcd .lcd-heart i {
+	color: red;
+}
+
+.navmain li:has(.navmain-lcd) {
+	padding-top: 3px;
+}
+
+.navmain li.active {
+	background-image: url("../media/metal_bg_navyblue.png");
+	padding-right: 10px;
+	padding-left: 10px;
 }
 
 .wrapper {
@@ -55,12 +152,12 @@ form.scheme-selector {
 	cursor: pointer;
 	cursor: hand;
 	background-image: url("../media/metal_bg_navyblue.png");
-	box-shadow: 0 0 8px #cc0000;
+	box-shadow: 0 0 8px lime;
 }
 
 
 .scheme-go {
-	background-image: url("../media/metal_bg_darkred.png");
+	background-image: url("../media/metal_bg_darkgreen.png");
 	font-size: 2rem;
 	vertical-align: middle;
 	padding-left: 10px;
@@ -71,7 +168,7 @@ form.scheme-selector {
 }
 
 .scheme:hover .scheme-go {
-	background-image: url("../media/metal_bg_red.png");
+	background-image: url("../media/metal_bg_green.png");
 	color: rgb(255,255,255);
 }
 
@@ -113,8 +210,12 @@ form.scheme-selector {
 	color: chartreuse;
 }
 
-.scheme-bugs {
+.get-bugs {
 	color: gold;
+}
+
+.pay-bugs {
+	color: red;
 }
 
 .scheme-rating {
@@ -123,14 +224,14 @@ form.scheme-selector {
 	font-weight: 700;
 	padding-left: 10px;
 	padding-right: 10px;
-	line-height: 1.5rem;
+	line-height: 1.75rem;
 }
 
 
 /* End Index */ 
 
 
-#mastermind .container {
+#mastermind {
 	background-image: url("../media/mmbg.jpg");
 	background-repeat: no-repeat;
 	background-size:  cover;
@@ -264,8 +365,40 @@ form.scheme-selector {
 	background-image: url("../media/feedback_invalid_h.png");
 }
 
-.pawn > .feedback .cell:not([data-pos]) {
+.pawn > .feedback > .row > .cell:not([data-pos]) {
 	background-image: url("../media/feedback_cell.png");
+}
+
+.pawn-active > .feedback > button {
+	padding: 0;
+	border: none;
+	background-color: transparent;
+}
+
+.pawn-active > .feedback > button .cell,
+.pawn-active > .feedback > button .active {
+	background-image: url("../media/feedback_button.png");
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+.pawn-active > .feedback > button:hover .cell {
+	background-image: url("../media/feedback_button_hover.png");
+}
+
+.pawn-active > .feedback > button:hover {
+	cursor: pointer;
+	cursor: hand;
+}
+
+
+.pawn-active > .feedback > button:active .cell {
+	background-position: 1px 1px;
+}
+
+.pawn-active > .feedback > button:focus,
+.pawn-active > .feedback > button:active {
+	outline-color: #00cc00;
 }
 
 .cf:after, .cf:before,
@@ -313,6 +446,34 @@ form.scheme-selector {
 .pawn-history > div[data-color] {
 	background-image: url("../media/cell_bg_h.png");
 	background-size: cover;
+}
+
+/* Property Bar */
+
+.cover {
+	background-color: rgba(0,0,0,0.6);
+	width: 100vw;
+	height: 100vh;
+	position: fixed;
+	top: 0;
+	z-index: 500;
+}
+
+.property-bar {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, 0%);
+  width: 750px;
+  height: 100px;
+  background-color: rgba(255,255,255,0.4);
+  border-radius: 5px 5px 0 0;
+  border: 1px solid #000;
+  box-shadow: 0 0 10px #000;
+}
+
+#mastermind main {
+	margin-bottom: 110px;
 }
 
 @media screen and (min-width: 1200px) {

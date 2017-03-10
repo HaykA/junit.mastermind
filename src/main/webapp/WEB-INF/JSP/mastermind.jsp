@@ -1,9 +1,10 @@
 <%@page contentType='text/html' pageEncoding='UTF-8' session='false' trimDirectiveWhitespaces="true"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@taglib prefix="mc" uri="http://howest.be/mastermind/core"%>
+<%@taglib prefix="bugs" uri="http://howest.be/bugs/core"%>
 
-<mc:head title="Homepage" bodyId="mastermind" />
-<mc:header/>
+<bugs:head title="Homepage" bodyId="mastermind" />
+<bugs:header active="games"/>
+
   <div class="wrapper container centered">
     <main>
 
@@ -18,6 +19,7 @@
             <button data-color="0"><span></span></button>
           </c:forEach>
           <div class="feedback">
+            <button>
             <c:set var="newRow" value='</div><div class="row">'/>
               <div class="row">
                 <c:forEach begin="1" end="${masterMind.pawnCount}" varStatus="current">
@@ -27,6 +29,7 @@
               </c:if>
                 </c:forEach>
               </div>
+            </button>
           </div>
         </div>
         </c:when>
@@ -85,10 +88,12 @@
           </div>
         </c:otherwise>
       </c:choose>
-    </c:forEach> </main>
+    </c:forEach> 
     <%-- END Looping through reverse sorted attempts --%>
-    
+    </main>
   </div>
 
-  <mc:tail/>
+<div class="property-bar"></div>
+
+  <bugs:tail/>
  

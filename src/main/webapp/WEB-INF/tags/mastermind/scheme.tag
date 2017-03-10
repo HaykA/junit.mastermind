@@ -8,10 +8,10 @@
 
 <c:choose>
   <c:when test="${scheme.difficultyRate == 0}">
-    <c:set var="difficultyRate" value="Unrated"/>  
+    <c:set var="bugs" value="Unrated"/>  
   </c:when>
   <c:otherwise>
-    <c:set var="difficultyRate" value='<i class="fa fa-bug scheme-bugs"></i> ${scheme.difficultyRate}'/>  
+    <c:set var="bugs" value='<i class="fa fa-bug get-bugs"></i> ${scheme.difficultyRate * 3}'/>  
   </c:otherwise>
 </c:choose>
 
@@ -38,7 +38,7 @@
   
           </small>
         
-        ${difficultyRate}
+        ${bugs}
         
         </td>
         <td rowspan="2" class="scheme-go"><i class="fa fa-chevron-right"></i></td>
