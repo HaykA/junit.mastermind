@@ -3,7 +3,7 @@ package be.howest.mastermind;
 import java.io.Serializable;
 
 import be.howest.entities.Scheme;
-import be.howest.mastermind.exceptions.MasterMindCheckException;
+import be.howest.mastermind.exceptions.InvalidAttemptException;
 
 public final class MasterMind implements Serializable {
 
@@ -13,6 +13,7 @@ public final class MasterMind implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private final Scheme scheme;
+	private final AttemptFactory attemptFactory;
 	private boolean resigned;
 	private boolean won;
 	private final AttemptList attemptList;
@@ -21,6 +22,7 @@ public final class MasterMind implements Serializable {
 	MasterMind(Scheme scheme) {
 		this.scheme = scheme;
 		attemptList = new AttemptList(scheme);
+		attemptFactory = new AttemptFactory(scheme);
 		reset();
 	}
 
@@ -43,11 +45,11 @@ public final class MasterMind implements Serializable {
 		return scheme.getColorCount();
 	}
 
-	public int[][] getAttempts() {
+	public Attempt[] getAttempts() {
 		return attemptList.getAttempts();
 	}
 	
-	public int[][] getReverseSortedAttempts() {
+	public Attempt[] getReverseSortedAttempts() {
 		return attemptList.getReverseSortedAttempts();
 	}
 	
@@ -64,23 +66,24 @@ public final class MasterMind implements Serializable {
 		won = false;
 	}
 
-	public Feedback check(int[] colors) throws MasterMindCheckException {
-		(new CheckValidator(scheme)).validateCheck(colors);
+	public Feedback check(int[] colors) throws InvalidAttemptException {
+		Attempt attempt = attemptFactory.createAttempt(colors);
 		Feedback feedback = null;
 		if (!isGameOver()) {
-			attemptList.add(colors);
-			feedback = generateFeedback(colors);
+			feedback = generateFeedback(attempt);
+			attempt.setFeedback(feedback);
+			attemptList.add(attempt);
 			checkIfWon(feedback);
 		}
 		return feedback;
 	}
 	
 
-	protected Feedback generateFeedback(int[] colors) {
+	protected Feedback generateFeedback(Attempt attempt) {
 		Feedback feedback = new Feedback(getColorCount());
-		for (int i = 0; i < colors.length; i++) {
+		for (int i = 0; i < attempt.size(); i++) {
 			for (int j = 0; j < secret.length; j++) {
-				if (colors[i] == secret[j]) {
+				if (attempt.get(i) == secret[j]) {
 					boolean foundAtValidPosition = i == j;
 					feedback.addFound(foundAtValidPosition);
 				}
@@ -90,7 +93,7 @@ public final class MasterMind implements Serializable {
 	}
 
 	protected void checkIfWon(Feedback feedback) {
-		won = feedback.getTotalFoundAtValidPosition() == getPawnCount();
+		won = feedback.isComplete();
 	}
 
 	public boolean isGameOver() {

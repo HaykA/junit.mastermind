@@ -1,9 +1,7 @@
 package be.howest.mastermind;
 
 import be.howest.entities.Color;
-import be.howest.mastermind.exceptions.MasterMindCheckException;
 import be.howest.services.ColorService;
-import be.howest.services.SchemeService;
 
 /**
  *

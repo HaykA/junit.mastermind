@@ -1,30 +1,30 @@
 package be.howest.mastermind;
 
 import be.howest.entities.Scheme;
-import be.howest.mastermind.exceptions.MasterMindCheckException;
+import be.howest.mastermind.exceptions.InvalidAttemptException;
 
-final class CheckValidator {
+final class AttemptValidator {
 	private final Scheme scheme;
 	
-	CheckValidator(Scheme scheme) {
+	AttemptValidator(Scheme scheme) {
 		this.scheme = scheme;
 	}
 	
-	void validateCheck(int[] colors) throws MasterMindCheckException {
+	void validate(int[] colors) throws InvalidAttemptException {
 		if (colors == null) {
-			throw new MasterMindCheckException("Null as Color array is not allowed!");
+			throw new InvalidAttemptException("Null as Color array is not allowed!");
 		}
 		if (colors.length > scheme.getPawnCount()) {
-			throw new MasterMindCheckException("Checking more colors than expected is not allowed!");
+			throw new InvalidAttemptException("Checking more colors than expected is not allowed!");
 		}
 		if (colors.length < scheme.getPawnCount()) {
-			throw new MasterMindCheckException("Checking less colors than expected is not allowed!");
+			throw new InvalidAttemptException("Checking less colors than expected is not allowed!");
 		}
 		if (! hasValidColors(colors, scheme.getColorCount())) {
-			throw new MasterMindCheckException("Checking with invalid colors is not allowed!");
+			throw new InvalidAttemptException("Checking with invalid colors is not allowed!");
 		}
 		if (! hasDifferentColors(colors, true)) {
-			throw new MasterMindCheckException("Checking with not different colors is not allowed!");
+			throw new InvalidAttemptException("Checking with not different colors is not allowed!");
 		}
 	}
 	

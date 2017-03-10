@@ -30,9 +30,13 @@ public class Feedback {
 		}
 		return totalFound - totalFoundAtValidPosition;
 	}
+	
+	public int getTotalFound() {
+		return totalFound;
+	}
 
 	public void addFound(boolean atValidPosition) {
-		if (!maximumReached()) {
+		if (!isComplete()) {
 			if (atValidPosition) {
 	    		totalFoundAtValidPosition++;
 	    	}
@@ -41,7 +45,7 @@ public class Feedback {
     	
     }
 	
-	private boolean maximumReached() {
+	boolean isComplete() {
 		return totalFound == colorCount;
 	}
 }

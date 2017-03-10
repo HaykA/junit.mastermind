@@ -4,11 +4,133 @@
 /* 991, 992 */
 /* 1200 */
 
-body {
+@import url('https://fonts.googleapis.com/css?family=Titillium+Web:400,400i,600,600i,700,700i,900');
 
+body {
+	font-family: "Titillium Web", sans-serif;
 }
 
-.container {
+.navheader,
+.navmain {
+	width: 100%;
+}
+
+.navheader-fixed {
+	position: fixed;
+	top: 0;
+}
+
+.navmain-default {
+	width: 100%;
+	background-color: #e6e6e6;
+}
+
+.wrapper {
+	margin-top: 75px;
+}
+
+/* Index */
+
+#homepage {
+	background-image: url("../media/bg-circuit.jpg");
+}
+
+form.scheme-selector {
+	max-width: 1200px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.scheme {
+	background-image: url("../media/metal_bg_darknavyblue.png");
+	margin: 5px;
+	border-radius: 5px;
+	box-shadow: 0 0 8px #999;
+	font-size: 2rem;
+	border: 1px solid #000;
+	background-position: right top;
+}
+
+.scheme:hover {
+	cursor: pointer;
+	cursor: hand;
+	background-image: url("../media/metal_bg_navyblue.png");
+	box-shadow: 0 0 8px #cc0000;
+}
+
+
+.scheme-go {
+	background-image: url("../media/metal_bg_darkred.png");
+	font-size: 2rem;
+	vertical-align: middle;
+	padding-left: 10px;
+	padding-right: 10px;
+	border-radius: 0 5px 5px 0;
+	color: rgba(255,255,255,0.8);
+	background-position: right top;
+}
+
+.scheme:hover .scheme-go {
+	background-image: url("../media/metal_bg_red.png");
+	color: rgb(255,255,255);
+}
+
+.scheme:hover th,
+.scheme:hover th+td {
+	color: rgb(255,255,255);
+}
+
+.scheme th {
+	text-align: right;
+	padding-left: 15px;
+	padding-right: 10px;
+	text-transform: uppercase;
+	color: rgba(255,255,255,0.8);
+}
+
+.scheme tr:first-of-type th {
+	padding-top: 25px;
+	padding-bottom: 5px;
+}
+
+.scheme tr:last-of-type th {
+	padding-top: 5px;
+	padding-bottom: 25px;
+}
+
+.scheme th+td {
+	color: rgba(255,255,255,0.8);
+	min-width: 72px;
+}
+
+.scheme td {
+	text-align: center;
+}
+
+.scheme small {
+	display: block;
+	font-size: 1rem;
+	color: chartreuse;
+}
+
+.scheme-bugs {
+	color: gold;
+}
+
+.scheme-rating {
+	color: rgba(255,255,255,0.8);
+	font-size: 1.5rem;
+	font-weight: 700;
+	padding-left: 10px;
+	padding-right: 10px;
+	line-height: 1.5rem;
+}
+
+
+/* End Index */ 
+
+
+#mastermind .container {
 	background-image: url("../media/mmbg.jpg");
 	background-repeat: no-repeat;
 	background-size:  cover;
@@ -16,7 +138,7 @@ body {
 	background-position: center center;
 }
 
-#mastermind {
+#mastermind main {
 	display: inline-block;
 	background-color: rgba(255,255,255,0.2);
 	box-shadow: 0 0 15px #000;
@@ -31,7 +153,6 @@ body {
 .pawn > * {
 	background-color: transparent;
 	background-size: cover;
-	float: left;
 	border: 0;
 	margin: 1px;
 }
@@ -112,25 +233,62 @@ body {
 	background-image: url("../media/colors/10.png");
 }
 
+.row {
+	display: block;
+	width: 100%;
+}
+
+.row > * {
+	float: left;
+}
+
+.feedback {
+	padding: 9px;
+}
+
+.feedback .cell {
+	width: 36px;
+	height: 36px;
+	background-size: cover;
+}
+
+.pawn-history > .feedback .cell[data-pos='empty'] {
+	background-image: url("../media/feedback_empty_h.png");
+}
+
+.pawn-history > .feedback .cell[data-pos='valid'] {
+	background-image: url("../media/feedback_valid_h.png");
+}
+
+.pawn-history > .feedback .cell[data-pos='invalid'] {
+	background-image: url("../media/feedback_invalid_h.png");
+}
+
+.pawn > .feedback .cell:not([data-pos]) {
+	background-image: url("../media/feedback_cell.png");
+}
+
 .cf:after, .cf:before,
-.pawn:after, .pawn:before {
+.row:after, .row:before {
     content: '';
     display: table;
 }
 
 .cf:after,
-.pawn:after {
+.row:after {
     clear: both;
 }
 
-.pawn > * {
+.pawn > [data-color],
+.pawn > .cell {
 	box-sizing: content-box;
 	width: 72px;
 	height: 72px;
 	padding: 9px;
 }
 
-.pawn-active > button[data-color] {
+.pawn-active > button[data-color],
+.pawn-active > button[data-color]:active {
 	background-image: url("../media/cell_bg_a.png");
 	background-size: cover;
 }
@@ -140,6 +298,16 @@ body {
 	background-size: cover;
 	cursor: pointer;
 	cursor: hand;
+}
+
+.pawn-active > button[data-color]:focus,
+.pawn-active > button[data-color]:active {
+	outline-color: #00cc00;
+}
+
+.pawn-active > button[data-color]:active,
+.pawn-active > button[data-color]:active > span {
+	background-position: 1px 1px;
 }
 
 .pawn-history > div[data-color] {

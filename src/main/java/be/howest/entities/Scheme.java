@@ -12,11 +12,17 @@ public final class Scheme implements Serializable {
 	private final long id;
 	private final int pawnCount;
 	private final int colorCount;
+	private final int difficultyRate;
 	
 	public Scheme(long id, int pawnCount, int colorCount) {
+		this(id, pawnCount, colorCount, 0);
+	}
+	
+	public Scheme(long id, int pawnCount, int colorCount, int difficultyRate) {
 		this.id = id;
 		this.pawnCount = pawnCount;
 		this.colorCount = colorCount;
+		this.difficultyRate = difficultyRate;
 	}
 	
 	public long getId() {
@@ -29,6 +35,10 @@ public final class Scheme implements Serializable {
 	
 	public int getColorCount() {
 		return colorCount;
+	}
+	
+	public int getDifficultyRate() {
+		return difficultyRate;
 	}
 	
 	public int getTotalAllowedAttempts() {

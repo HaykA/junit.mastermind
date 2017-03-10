@@ -3,39 +3,45 @@ package be.howest.mastermind;
 import be.howest.entities.Scheme;
 
 public class AttemptList {
-	private final int[][] attempts;
+	private final Attempt[] attempts;
 	
 	AttemptList(Scheme scheme) {
-		attempts = new int[scheme.getTotalAllowedAttempts()][scheme.getPawnCount()];
+		attempts = new Attempt[scheme.getTotalAllowedAttempts()];
 	}
 	
-	int[][] getAttempts() {
+	Attempt[] getAttempts() {
 		return attempts;
 	}
 	
-	int[][] getReverseSortedAttempts() {
+	Attempt[] getReverseSortedAttempts() {
 		if (attempts.length > 1) {
-			int[][] reversedAttempts = new int[attempts.length][attempts[0].length];
-			for (int i = attempts.length - 1; i >= 0; i--) {
-				for (int j = 0; j < attempts[i].length; j++) {
-					reversedAttempts[attempts.length - i - 1][j] = attempts[i][j];
-				}
+			Attempt[] reversedAttempts = new Attempt[attempts.length];
+			for (int i = 0; i < attempts.length; i++) {
+				reversedAttempts[attempts.length - i - 1] = attempts[i];
 			}			
 			return reversedAttempts;
 		}
+		return copyOf(attempts);
+	}
+	
+	private Attempt[] copyOf(Attempt[] attempts) {
+		if (attempts != null) {
+			Attempt[] copyOfAttempts = new Attempt[attempts.length];
+			for (int i = 0; i < attempts.length; i++) {
+				copyOfAttempts[i] = attempts[i];
+			}
+			return copyOfAttempts;
+		}
 		return attempts;
 	}
 	
-	boolean add(int[] colors) {
-		boolean added = false;
+	boolean add(Attempt attempt) {
 		int nextIndex = getCurrentAttemptIndex();
 		if (nextIndex >= 0) {
-			for (int i = 0; i < colors.length; i++) {
-				attempts[nextIndex][i] = colors[i];
-			}				
-			added = true;
+			attempts[nextIndex] = attempt;				
+			return true;
 		}
-		return added;
+		return false;
 	}
 	
 	boolean hasNext() {
@@ -43,29 +49,17 @@ public class AttemptList {
 	}
 	
 	int getCurrentAttemptIndex() {
-		int nextIndex = -1;
-		boolean emptyLine;
 		for (int i = 0; i < attempts.length; i++) {
-			emptyLine = true;
-			for (int attempt : attempts[i]) {
-				if (attempt > 0) {
-					emptyLine = false;
-					break;
-				}
-			}
-			if (emptyLine) {
-				nextIndex = i;
-				break;
+			if (attempts[i] == null) {
+				return i;
 			}
 		}
-		return nextIndex;
+		return -1;
 	}
 	
 	void reset() {
-		for (int[] attempt : attempts) {
-			for (int i = 0; i < attempt.length; i++) {
-				attempt[i] = 0;
-			}
+		for (int i = 0; i < attempts.length; i++) {
+			attempts[i] = null;
 		}
 	}
 	

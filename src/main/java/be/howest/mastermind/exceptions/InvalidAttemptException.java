@@ -1,13 +1,13 @@
 package be.howest.mastermind.exceptions;
 
-public class MasterMindCheckException extends Exception {
+public class InvalidAttemptException extends Exception {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	public MasterMindCheckException(String message) {
+	public InvalidAttemptException(String message) {
 		super(message);
 	}
 
