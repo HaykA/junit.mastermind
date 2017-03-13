@@ -3,8 +3,8 @@
 <%@taglib prefix="bugs" uri="http://howest.be/bugs/core"%>
 <%@taglib prefix="mm" uri="http://howest.be/bugs/mastermind"%>
 
-<bugs:head title="Homepage" bodyId="homepage"/>
-<bugs:header active="home"/>
+<bugs:head title="MasterMind" bodyId="homepage"/>
+<bugs:header active="games"/>
 
 <div class="wrapper container">
 

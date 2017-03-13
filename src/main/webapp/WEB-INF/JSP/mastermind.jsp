@@ -2,7 +2,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="bugs" uri="http://howest.be/bugs/core"%>
 
-<bugs:head title="Homepage" bodyId="mastermind" />
+<bugs:head title="MasterMind" bodyId="mastermind" />
 <bugs:header active="games"/>
 
   <div class="wrapper container centered">
